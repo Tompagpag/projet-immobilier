@@ -1,7 +1,25 @@
 body {
-  background-color: #f00;
+  background-color: white;
 }
 
-a:hover {
-  color: black;
+.navbar {
+  border-bottom: 1px solid #1190CB;
+  /* border-radius: 0% 0% 25% 25%; */
+}
+
+#navbarToggler {
+  justify-content: flex-end;
+  color: red;
+}
+
+li a {
+  color: #1190CB !important;
+}
+
+h1 {
+  color: #1190CB !important;
+}
+
+.fa {
+  color: #1D7A8C;
 }
