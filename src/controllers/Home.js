@@ -1,4 +1,4 @@
-module.exports = class Home {
+export default class Home {
     print(req, res) {
         res.render('home');
     }

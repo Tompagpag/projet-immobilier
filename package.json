@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Projet immobilier La passerelle",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "browser-refresh server.js",
     "start": "node server.js",

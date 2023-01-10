@@ -1,7 +1,14 @@
-const express = require('express');
+import * as dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+import { dirname } from "path";
+import path from "path";
+import { fileURLToPath } from "url";
+import routes from './app/routes.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const path = require('path');
-require('dotenv').config();
+
 
 //--------------------------------------------------------------------
 //      Mise en place du moteur de template
@@ -31,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 //--------------------------------------------------------------------
 //      Chargement des routes
 //--------------------------------------------------------------------
-require('./app/routes')(app);
+routes(app);
 
 //--------------------------------------------------------------------
 //     Ecoute du serveur HTTP
