@@ -23,17 +23,10 @@ app.use((req, res, next) => {
 })
 
 //--------------------------------------------------------------------
-//      Sass Middleware
+//      Middleware pour utiliser le body de la request
 //--------------------------------------------------------------------
-// const sassMiddleware = require('node-sass-middleware');
-// app.use(sassMiddleware({
-//     /* Options */
-//     src: path.join(__dirname, 'build/'),
-//     dest: path.join(__dirname, 'public/'),
-//     debug: false,   // true pour voir les traitements effectués
-//     indentedSyntax: false, // true Compiles files with the .sass extension
-//     outputStyle: 'compressed'
-// }));
+app.use(express.urlencoded({ extended: false }));
+//app.use(express.json()); ??
 
 //--------------------------------------------------------------------
 //      Chargement des routes
@@ -49,3 +42,16 @@ app.listen(process.env.PORT,() => {
   }
   console.log(`Le serveur est démarré : http://localhost:${process.env.PORT}`);
 });
+
+//--------------------------------------------------------------------
+//      Sass Middleware
+//--------------------------------------------------------------------
+// const sassMiddleware = require('node-sass-middleware');
+// app.use(sassMiddleware({
+//     /* Options */
+//     src: path.join(__dirname, 'build/'),
+//     dest: path.join(__dirname, 'public/'),
+//     debug: false,   // true pour voir les traitements effectués
+//     indentedSyntax: false, // true Compiles files with the .sass extension
+//     outputStyle: 'compressed'
+// }));

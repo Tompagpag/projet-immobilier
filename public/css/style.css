@@ -15,6 +15,9 @@ body {
 li a {
   color: #1190CB !important;
 }
+li a:hover {
+  color: #1D7A8C !important;
+}
 
 h1 {
   color: #1190CB !important;
@@ -22,4 +25,14 @@ h1 {
 
 .fa {
   color: #1D7A8C;
+}
+
+.btn-primary {
+  background-color: #1190CB !important;
+  border-color:#1190CB !important;
+}
+
+.btn-primary:hover {
+  background-color: #1D7A8C !important;
+  border-color: #1D7A8C !important;
 }
