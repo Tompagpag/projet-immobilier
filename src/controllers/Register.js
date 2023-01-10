@@ -1,4 +1,6 @@
-module.exports = class Register {
+import User from "../repository/User.js"
+
+export default class Register {
     print(req, res) {
         res.render('register/form');
     }
@@ -6,8 +8,6 @@ module.exports = class Register {
     process(req, res) {
       console.log("---REQ.BODY:----",req.body);
       try {
-        let User = require('../repository/User.js');
-        // console.log(User);
         (new User()).createUser(req, res);
         res.status(201).redirect('/')
       } catch (error) {
