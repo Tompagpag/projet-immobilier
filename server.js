@@ -4,7 +4,9 @@ import express from "express";
 import { dirname } from "path";
 import path from "path";
 import { fileURLToPath } from "url";
-import routes from './app/routes.js'
+import routes from './app/routes.js';
+import session from "express-session";
+import flash from "express-flash-messages";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -25,15 +27,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 //      Middleware pour mettre le titre du site
 //--------------------------------------------------------------------
 app.use((req, res, next) => {
-  res.locals.websiteName = '🏘️ Mon site immo ';
+  res.locals.websiteName = '🏘️ Pagz Immo - Vous loger, notre priorité 🏢';
   next();
 })
+
+//--------------------------------------------------------------------
+//      Ajout du midlleware express session
+//--------------------------------------------------------------------
+app.use(session({
+    secret: process.env.APP_KEY, resave:false, saveUninitialized:false,
+    cookie: {maxAge: 3600000}
+}));
+//--------------------------------------------------------------------
+//      Ajout du midlleware express flash messages
+//--------------------------------------------------------------------
+app.use(flash());
+
+//--------------------------------------------------------------------
+//      Middleware pour transmettre la session à la vue
+//--------------------------------------------------------------------
+
+app.use((req,res,next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 //--------------------------------------------------------------------
 //      Middleware pour utiliser le body de la request
 //--------------------------------------------------------------------
 app.use(express.urlencoded({ extended: false }));
-//app.use(express.json()); ??
+//app.use(express.json());
 
 //--------------------------------------------------------------------
 //      Chargement des routes

@@ -36,3 +36,16 @@ h1 {
   background-color: #1D7A8C !important;
   border-color: #1D7A8C !important;
 }
+
+.alert {
+  width: 18rem;
+  position: absolute;
+  top: 88%;
+  right: 2%;
+}
+
+.alert-info {
+  color: white;
+  background-color: #1190CB;
+  border-color: #1190CB;
+}
