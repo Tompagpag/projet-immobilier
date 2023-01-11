@@ -4,7 +4,9 @@ import express from "express";
 import { dirname } from "path";
 import path from "path";
 import { fileURLToPath } from "url";
-import routes from './app/routes.js'
+import routes from './app/routes.js';
+import session from "express-session";
+import flash from "express-flash-messages";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -28,6 +30,20 @@ app.use((req, res, next) => {
   res.locals.websiteName = '🏘️ Mon site immo ';
   next();
 })
+
+//--------------------------------------------------------------------
+//      Ajout du midlleware express session
+//--------------------------------------------------------------------
+// const session = require('express-session');
+app.use(session({
+    secret: process.env.APP_KEY, resave:false, saveUninitialized:false,
+    cookie: {maxAge: 3600000}
+}));
+//--------------------------------------------------------------------
+//      Ajout du midlleware express flash messages
+//--------------------------------------------------------------------
+// const flash = require('express-flash-messages');
+app.use(flash());
 
 //--------------------------------------------------------------------
 //      Middleware pour utiliser le body de la request

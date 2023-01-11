@@ -22,6 +22,7 @@ export default class Register {
           } else {
             user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
             newUser.createUser(user);
+            req.flash('notify', 'Votre compte a bien été créé.');
             res.status(201).redirect('/');
           }
         }).catch((error) => {
