@@ -1,12 +1,12 @@
 import User from "../repository/Users.js"
+import bcrypt from 'bcryptjs';
 
 export default class Register {
     print(req, res) {
-        res.render('register/form');
+        res.render('register/form', {user: {}});
     }
 
     process(req, res) {
-      try {
         const newUser = new User();
         const user = {
             civility : (req.body.civility == "1" ? 'M' : 'F'),
@@ -16,10 +16,16 @@ export default class Register {
             phone : req.body.phone || '',
             password : req.body.password || ''
         };
-        newUser.createUser(user);
-        res.status(201).redirect('/')
-      } catch (error) {
-        console.log(error);
-      }
+        newUser.emailExists(user.email).then((exists) => {
+          if (exists) {
+            res.render('register/form', {user, error: 'Cet adresse email existe déjà.'});
+          } else {
+            user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
+            newUser.createUser(user);
+            res.status(201).redirect('/');
+          }
+        }).catch((error) => {
+        res.render('register/form', {user, error: 'Une erreur est survenue.'});
+      });
     }
 };
