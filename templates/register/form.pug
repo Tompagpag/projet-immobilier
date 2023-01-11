@@ -1,12 +1,14 @@
 extends ../layout.pug
 block content
-    h1.py-3 Inscription
+    h1 Inscription
+    if error
+        .alert.alert-danger #{error}
     form(action='/inscription' method="post")
         .input-group.mb-3
             .input-group-prepend
                 .input-group-text.d-none.d-lg-block
                     i.fa.fa-envelope
-            input(type="email" class="form-control" placeholder="Email" name="email")
+            input(type="email" class="form-control" placeholder="Email" name="email" value=user.email)
 
         .input-group.mb-3
             .input-group-prepend
@@ -28,19 +30,19 @@ block content
             .input-group-prepend
                 .input-group-text.d-none.d-lg-block
                     i.fa.fa-user
-            input(type="text" class="form-control" placeholder="Nom" name="lastname")
+            input(type="text" class="form-control" placeholder="Nom" name="lastname" value=user.lastname)
 
         .input-group.mb-3
             .input-group-prepend
                 .input-group-text.d-none.d-lg-block
                     i.fa.fa-user
-            input(type="text" class="form-control" placeholder="Prénom" name="firstname")
+            input(type="text" class="form-control" placeholder="Prénom" name="firstname" value=user.firstname)
 
         .input-group.mb-3
             .input-group-prepend
                 .input-group-text.d-none.d-lg-block
                     i.fa.fa-phone
-            input(type="phone" class="form-control" placeholder="Téléphone" name="phone")
+            input(type="phone" class="form-control" placeholder="Téléphone" name="phone" value=user.phone)
 
         .row.justify-content-center
             .col-2
