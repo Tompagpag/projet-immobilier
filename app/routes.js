@@ -12,6 +12,7 @@ export default (app) => {
       });
 
     app.post('/inscription', (req, res) => {
-        const newUser = (new Register()).process(req, res);
+        const newRegister = new Register()
+        newRegister.process(req, res);
     })
 };
