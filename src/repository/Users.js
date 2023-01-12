@@ -18,9 +18,19 @@ export default class User {
   }
 
   getUserByEmail(email) {
-    return connexion.promise().query("SELECT `password` FROM `users` WHERE `email`=?", email).then((rows) => {
+    return connexion.promise().query("SELECT `id`, `password`, `firstname`, `lastname` FROM `users` WHERE `email`=?", email).then((rows) => {
       if (rows[0].length == 1) {
-        return rows[0][0].password
+        return rows[0][0]
+      } else {
+        return Promise.reject("L'utilisateur n'existe pas.")
+      }
+    })
+  }
+
+  getUserById(id) {
+    return connexion.promise().query("SELECT `firstname`, `lastname` FROM `users` WHERE `id`=?", id).then((rows) => {
+      if (rows[0].length == 1) {
+        return rows[0][0]
       } else {
         return Promise.reject("L'utilisateur n'existe pas.")
       }
@@ -28,7 +38,7 @@ export default class User {
   }
 
   getUserList() {
-    return connexion.promise().query("SELECT `firstname`, `lastname`, `email`, `phone` FROM `users` ORDER BY `firstname` LIMIT 10").then((rows) => {
+    return connexion.promise().query("SELECT `id`, `firstname`, `lastname`, `email`, `phone` FROM `users` ORDER BY `firstname`").then((rows) => {
       if (rows[0].length >= 1) {
         return rows[0]
       } else {
@@ -36,10 +46,11 @@ export default class User {
       }
     })
   }
-    // userPassword(email, givenPassword) {
-    //   return connexion.promise().query("SELECT `password` FROM `users` WHERE `email`=?", email).then((rows) => {
-    //     return (bcrypt.compareSync(givenPassword, rows[0].password))
-    //   })
-    // }
 
+  deleteUser(id) {
+    return connexion.promise().query("DELETE FROM `users` WHERE `id`= ?", id).then((rows) => {
+      return rows[0].affectedRows
+    })
   }
+
+}

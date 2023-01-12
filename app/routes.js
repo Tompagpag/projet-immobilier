@@ -41,4 +41,12 @@ export default (app) => {
       (new AdminUser()).print(req, res);
     });
 
+    app.get('/admin/user/delete/:id', (req,res) => {
+      (new AdminUser()).delete(req, res);
+    });
+
+    // app.delete('/admin/user/delete/:id', (req,res) => {
+
+    // });
+
 };

@@ -39,7 +39,7 @@ h1 {
 
 .alert {
   width: 18rem;
-  position: absolute;
+  position: fixed;
   top: 88%;
   right: 2%;
 }
@@ -69,4 +69,12 @@ tr {
 
 tbody tr:nth-child(odd) {
   background-color: gainsboro;
+}
+
+.fa-trash {
+  color: white !important;
+}
+
+.fa-pen {
+  color: white !important;
 }
