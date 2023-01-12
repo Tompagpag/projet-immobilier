@@ -32,11 +32,18 @@ app.use(session({
 }));
 
 //--------------------------------------------------------------------
-//      Middleware pour mettre le titre du site
+//      Exemple Session fictive
+//--------------------------------------------------------------------
+app.use((req,res,next) => {  req.session.user = { id: 15, firstname: 'tots', lastname : 'pagz' }; next(); });
+
+//--------------------------------------------------------------------
+//      Middleware pour transmettre les données à PUG (titre, session ...)
 //--------------------------------------------------------------------
 app.use((req, res, next) => {
   res.locals.session = req.session;
-  res.locals.websiteName = '🏘️ Pagz Immo - Vous loger, notre priorité 🏢';
+  // route => pour l'admin
+  res.locals.route = req._parsedUrl.pathname;
+  res.locals.websiteName = process.env.SITE_NAME;
   next();
 })
 
