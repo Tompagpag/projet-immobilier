@@ -1,4 +1,4 @@
-import User from "../repository/Users.js";
+import User from "../../repository/Users.js";
 import bcrypt from 'bcryptjs';
 
 export default class Authenticated {

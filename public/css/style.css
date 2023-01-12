@@ -49,3 +49,24 @@ h1 {
   background-color: #1190CB;
   border-color: #1190CB;
 }
+
+
+
+
+
+
+thead {
+  border-bottom: 1px solid black;
+}
+
+tbody tr {
+  border-bottom: 1px solid darkgrey ;
+}
+
+tr {
+  height: 3rem;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: gainsboro;
+}

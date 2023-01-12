@@ -1,7 +1,8 @@
 import Home from "../src/controllers/Home.js"
-import Register from "../src/controllers/Register.js"
-import Authenticated from "../src/controllers/Authenticated.js"
-import Dashboard from "../src/controllers/Dashboard.js"
+import Register from "../src/controllers/connexion/Register.js"
+import Authenticated from "../src/controllers/connexion/Authenticated.js"
+import Dashboard from "../src/controllers/admin/Dashboard.js"
+import AdminUser from "../src/controllers/admin/AdminUser.js"
 
 export default (app) => {
 
@@ -36,5 +37,8 @@ export default (app) => {
       (new Dashboard()).print(req, res);
     });
 
+    app.get('/admin/user', (req, res) => {
+      (new AdminUser()).print(req, res);
+    });
 
 };
