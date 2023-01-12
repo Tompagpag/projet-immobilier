@@ -4,23 +4,27 @@ block breadcrumb
 
 block content
     div.d-flex.justify-content-between
-      h1 Liste des utilisateurs
-      a.btn.btn-primary(href="#") Ajouter un utilisateur
+      div
+        h1 Liste des utilisateurs
+      div
+        a.btn.btn-primary(href="#") Ajouter un utilisateur
     hr
     table
       thead
         tr
+          th Civilité
           th Nom
           th Email
           th Téléphone
       tbody
         each user in users
           tr
-            td= `${user.firstname} ${user.lastname}`
-            td= user.email
-            td= user.phone
+            td(align="center")= user.civility
+            td(align="center")= `${user.firstname} ${user.lastname}`
+            td(align="center")= user.email
+            td(align="center")= user.phone
             td
-              a.btn(href="#")
+              a.btn(href=`/admin/user/edit/${user.id}`)
                   button.btn.btn-primary
                       i.fa.fa-pen
             td
@@ -28,3 +32,4 @@ block content
                 a(href=`/admin/user/delete/${user.id}`)
                     button.btn.btn-danger
                         i.fa.fa-trash
+      script(src="/js/confirm_delete.js")

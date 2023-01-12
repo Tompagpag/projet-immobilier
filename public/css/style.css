@@ -40,8 +40,8 @@ h1 {
 .alert {
   width: 18rem;
   position: fixed;
-  top: 88%;
-  right: 2%;
+  top: 85%;
+  left: 2%;
 }
 
 .alert-info {
@@ -54,6 +54,14 @@ h1 {
 
 
 
+.navbar-brand {
+  color: #1190CB !important;
+}
+
+th {
+  text-align: center;
+  color: #1190CB !important;
+}
 
 thead {
   border-bottom: 1px solid black;
@@ -61,6 +69,7 @@ thead {
 
 tbody tr {
   border-bottom: 1px solid darkgrey ;
+  color: #1D7A8C;
 }
 
 tr {
@@ -77,4 +86,8 @@ tbody tr:nth-child(odd) {
 
 .fa-pen {
   color: white !important;
+}
+
+#dropdownUser1 {
+  color: #1190CB !important;
 }
