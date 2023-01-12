@@ -38,7 +38,7 @@ export default class User {
   }
 
   getUserList() {
-    return connexion.promise().query("SELECT `id`, `firstname`, `lastname`, `email`, `phone` FROM `users` ORDER BY `firstname`").then((rows) => {
+    return connexion.promise().query("SELECT `id`, `firstname`, `lastname`, `email`, `phone`, `civility` FROM `users` ORDER BY `firstname`").then((rows) => {
       if (rows[0].length >= 1) {
         return rows[0]
       } else {

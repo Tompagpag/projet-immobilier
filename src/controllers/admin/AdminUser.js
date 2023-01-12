@@ -3,7 +3,7 @@ import User from "../../repository/Users.js";
 export default class AdminUser {
   print(req, res) {
     (new User()).getUserList().then((users) => {
-      console.log(req.session.user)
+      // console.log(req.session.user)
       res.render('admin/users/list_users', {users});
     }).catch((error) => {
       res.render('authenticated/form', {user: {}, error})
