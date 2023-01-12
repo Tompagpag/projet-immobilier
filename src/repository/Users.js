@@ -19,7 +19,7 @@ export default class User {
 
   getUserByEmail(email) {
     return connexion.promise().query("SELECT `password` FROM `users` WHERE `email`=?", email).then((rows) => {
-      if (rows[0].length) {
+      if (rows[0].length == 1) {
         return rows[0][0].password
       } else {
         return Promise.reject("L'utilisateur n'existe pas.")

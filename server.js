@@ -24,33 +24,33 @@ app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
 //--------------------------------------------------------------------
-//      Middleware pour mettre le titre du site
-//--------------------------------------------------------------------
-app.use((req, res, next) => {
-  res.locals.websiteName = '🏘️ Pagz Immo - Vous loger, notre priorité 🏢';
-  next();
-})
-
-//--------------------------------------------------------------------
 //      Ajout du midlleware express session
 //--------------------------------------------------------------------
 app.use(session({
     secret: process.env.APP_KEY, resave:false, saveUninitialized:false,
     cookie: {maxAge: 3600000}
 }));
+
+//--------------------------------------------------------------------
+//      Exemple Session fictive
+//--------------------------------------------------------------------
+app.use((req,res,next) => {  req.session.user = { id: 15, firstname: 'tots', lastname : 'pagz' }; next(); });
+
+//--------------------------------------------------------------------
+//      Middleware pour transmettre les données à PUG (titre, session ...)
+//--------------------------------------------------------------------
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  // route => pour l'admin
+  res.locals.route = req._parsedUrl.pathname;
+  res.locals.websiteName = process.env.SITE_NAME;
+  next();
+})
+
 //--------------------------------------------------------------------
 //      Ajout du midlleware express flash messages
 //--------------------------------------------------------------------
 app.use(flash());
-
-//--------------------------------------------------------------------
-//      Middleware pour transmettre la session à la vue
-//--------------------------------------------------------------------
-
-app.use((req,res,next) => {
-    res.locals.session = req.session;
-    next();
-});
 
 //--------------------------------------------------------------------
 //      Middleware pour utiliser le body de la request

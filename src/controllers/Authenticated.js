@@ -3,10 +3,18 @@ import bcrypt from 'bcryptjs';
 
 export default class Authenticated {
     print(req, res) {
+      if (req.session.user) {
+        req.flash('notify', `Vous êtes déjà connecté.`);
+        return res.redirect('/');
+      }
       res.render('authenticated/form', {user: {}});
     }
 
     process(req, res) {
+      if (req.session.user) {
+        req.flash('notify', `Vous êtes déjà connecté.`);
+        return res.redirect('/');
+      }
       const newUserConnection = new User()
       const user = {
         email: req.body.email,

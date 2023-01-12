@@ -3,10 +3,18 @@ import bcrypt from 'bcryptjs';
 
 export default class Register {
     print(req, res) {
+      if (req.session.user) {
+        req.flash('notify', `Vous êtes déjà connecté.`);
+        return res.redirect('/');
+      }
       res.render('register/form', {user: {}});
     }
 
     process(req, res) {
+      if (req.session.user) {
+        req.flash('notify', `Vous êtes déjà connecté.`);
+        return res.redirect('/');
+      }
       const newUser = new User();
       const user = {
           civility : (req.body.civility == "1" ? 'M' : 'F'),

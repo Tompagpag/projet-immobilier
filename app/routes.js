@@ -1,6 +1,7 @@
 import Home from "../src/controllers/Home.js"
 import Register from "../src/controllers/Register.js"
 import Authenticated from "../src/controllers/Authenticated.js"
+import Dashboard from "../src/controllers/Dashboard.js"
 
 export default (app) => {
 
@@ -30,5 +31,10 @@ export default (app) => {
     app.get('/deconnexion', (req, res) => {
       (new Authenticated()).disconnect(req, res);
     });
+
+    app.get('/admin', (req, res) => {
+      (new Dashboard()).print(req, res);
+    });
+
 
 };
