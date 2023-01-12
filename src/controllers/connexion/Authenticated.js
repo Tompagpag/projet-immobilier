@@ -15,21 +15,21 @@ export default class Authenticated {
         req.flash('notify', `Vous êtes déjà connecté.`);
         return res.redirect('/');
       }
-      const newUserConnection = new User()
-      const user = {
-        email: req.body.email,
-        password: req.body.password,
-      }
-      newUserConnection.getUserByEmail(user.email).then((hash) => {
-        if (bcrypt.compareSync(user.password, hash)) {
-          req.session.user = user.email;
+      const newUserConnection = new User();
+      newUserConnection.getUserByEmail(req.body.email).then((user) => {
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          req.session.user = {
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+          };
           req.flash('notify', `Vous êtes maintenant connecté.`)
           res.status(201).redirect('/');
         } else {
-          res.render('authenticated/form', {user, error: 'Mot de passe érroné !'});
+          res.render('authenticated/form', {user: {email: req.body.email}, error: 'Mot de passe érroné !'});
         }
       }).catch((error) => {
-          res.render('authenticated/form', {user, error});
+          res.render('authenticated/form', {user: {email: req.body.email}, error});
       })
     }
 
