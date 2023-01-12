@@ -29,7 +29,20 @@ block content
                       i.fa.fa-pen
             td
               if user.id != session.user.id
-                a(href=`/admin/user/delete/${user.id}`)
+                a(id=`myInput${user.id}` href=`/admin/user/delete/${user.id}` data-bs-toggle="modal" data-bs-target="#myModal")
                     button.btn.btn-danger
                         i.fa.fa-trash
-      script(src="/js/confirm_delete.js")
+
+    .modal.fade(id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            h5.modal-title(id="myModalLabel") Confirmation de suppression
+            button.close(type="button" data-bs-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+          .modal-body Souhaitez-vous réellement supprimer l'utilisateur ?
+          .modal-footer
+            button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Annuler
+            a.btn.btn-danger(id="delete_link" href=`/admin/user/delete/id`) Supprimer
+
+    script(src="/js/modal_delete.js")

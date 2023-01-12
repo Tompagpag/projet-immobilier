@@ -91,3 +91,8 @@ tbody tr:nth-child(odd) {
 #dropdownUser1 {
   color: #1190CB !important;
 }
+
+#sidebarMenu > ul{
+  position:fixed;
+  margin-top: 3rem;
+}
