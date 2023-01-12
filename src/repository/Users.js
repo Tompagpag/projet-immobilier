@@ -27,6 +27,15 @@ export default class User {
     })
   }
 
+  getUserList() {
+    return connexion.promise().query("SELECT `firstname`, `lastname`, `email`, `phone` FROM `users` ORDER BY `firstname` LIMIT 10").then((rows) => {
+      if (rows[0].length >= 1) {
+        return rows[0]
+      } else {
+        return Promise.reject("Il n'y a pas d'utilisateur en base de données.")
+      }
+    })
+  }
     // userPassword(email, givenPassword) {
     //   return connexion.promise().query("SELECT `password` FROM `users` WHERE `email`=?", email).then((rows) => {
     //     return (bcrypt.compareSync(givenPassword, rows[0].password))
