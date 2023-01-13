@@ -28,7 +28,7 @@ export default class User {
   }
 
   getUserById(id) {
-    return connexion.promise().query("SELECT `firstname`, `lastname` FROM `users` WHERE `id`=?", id).then((rows) => {
+    return connexion.promise().query("SELECT `firstname`, `lastname`, `email`, `civility`, `phone` FROM `users` WHERE `id`=?", id).then((rows) => {
       if (rows[0].length == 1) {
         return rows[0][0]
       } else {
@@ -50,6 +50,12 @@ export default class User {
   deleteUser(id) {
     return connexion.promise().query("DELETE FROM `users` WHERE `id`= ?", id).then((rows) => {
       return rows[0].affectedRows
+    })
+  }
+
+  updateUser(id,userToUpdate) {
+    return connexion.promise().query("UPDATE `users` SET ? WHERE `id`= ?", [userToUpdate, id]).then((rows) => {
+      return rows[0].affectedRows;
     })
   }
 

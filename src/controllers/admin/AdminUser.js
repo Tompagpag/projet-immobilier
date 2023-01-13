@@ -21,4 +21,22 @@ export default class AdminUser {
       })
     })
   }
+
+  editForm(req, res) {
+    (new User()).getUserById(req.params.id).then((user) => {
+      user.id = req.params.id;
+      res.render('admin/users/edit_user', {user});
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+    editUser(req, res) {
+      const id = req.params.id;
+      const { email, civility, lastname, firstname, phone } = req.body;
+      (new User().updateUser(id, { email, civility, lastname, firstname, phone })).then(() => {
+        req.flash('notify', `L'utilisateur ${firstname} ${lastname} a été mis à jour.`);
+        res.redirect('/admin/user');
+      })
+    }
 }

@@ -9,7 +9,6 @@ body {
 
 #navbarToggler {
   justify-content: flex-end;
-  color: red;
 }
 
 li a {
@@ -42,6 +41,7 @@ h1 {
   position: fixed;
   top: 85%;
   left: 2%;
+  opacity: 0.9;
 }
 
 .alert-info {
@@ -95,4 +95,10 @@ tbody tr:nth-child(odd) {
 #sidebarMenu > ul{
   position:fixed;
   margin-top: 3rem;
+}
+
+.active {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  color: #1D7A8C !important;
 }

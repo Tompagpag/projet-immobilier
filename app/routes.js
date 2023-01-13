@@ -45,8 +45,11 @@ export default (app) => {
       (new AdminUser()).delete(req, res);
     });
 
-    // app.delete('/admin/user/delete/:id', (req,res) => {
+    app.get('/admin/user/edit/:id', (req, res) => {
+      (new AdminUser()).editForm(req, res);
+    })
 
-    // });
-
+    app.post('/admin/user/update/:id', (req, res) => {
+      (new AdminUser()).editUser(req, res);
+    })
 };
