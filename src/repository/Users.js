@@ -55,7 +55,8 @@ export default class User {
 
   updateUser(id,userToUpdate) {
     return connexion.promise().query("UPDATE `users` SET ? WHERE `id`= ?", [userToUpdate, id]).then((rows) => {
-      return rows[0].affectedRows;
+      if(rows[0].affectedRows === 1) return Promise.resolve();
+      return Promise.reject();
     })
   }
 
