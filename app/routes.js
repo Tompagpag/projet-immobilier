@@ -3,9 +3,11 @@ import Register from "../src/controllers/connexion/Register.js"
 import Authenticated from "../src/controllers/connexion/Authenticated.js"
 import Dashboard from "../src/controllers/admin/Dashboard.js"
 import AdminUser from "../src/controllers/admin/AdminUser.js"
+import AdminRealty from "../src/controllers/admin/AdminRealty.js"
 
 export default (app) => {
 
+  // home and connexion
     app.get('/', (req, res) => {
       (new Home()).print(req, res);
     });
@@ -33,10 +35,12 @@ export default (app) => {
       (new Authenticated()).disconnect(req, res);
     });
 
+  // admin
     app.get('/admin', (req, res) => {
       (new Dashboard()).print(req, res);
     });
 
+  // admin/user
     app.get('/admin/user', (req, res) => {
       (new AdminUser()).print(req, res);
     });
@@ -52,4 +56,10 @@ export default (app) => {
     app.post('/admin/user/update/:id', (req, res) => {
       (new AdminUser()).editUser(req, res);
     })
-};
+
+  // admin/realty
+    app.get('/admin/realty', (req, res) => {
+      (new AdminRealty()).print(req, res);
+    })
+
+  };

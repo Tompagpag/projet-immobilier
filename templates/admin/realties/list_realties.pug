@@ -1,0 +1,46 @@
+extends ../layout.pug
+block breadcrumb
+    p.fa.fa-home &nbsp; | Les biens
+
+block content
+    div.d-flex.justify-content-between
+      div
+        h1 Liste des biens
+      div
+        a.btn.btn-primary(href="#") Ajouter un bien
+    hr
+    table
+      thead
+        tr
+          th Vendeur
+          th Adresse
+          th Description
+      tbody
+        each realty in realties
+          tr
+            td(align="center")= `${realty.firstname} ${realty.lastname.toUpperCase()}`
+            td(align="center")= `${realty.adress || ''}\n${realty.zipcode || ''} ${realty.town || ''}`
+            td(align="center")= realty.info
+            td
+              a.btn(href=`/admin/realty/edit/${realty.id}`)
+                  button.btn.btn-primary
+                      i.fa.fa-pen
+            td
+              a(id=`myInput${realty.id}` href=`/admin/realty/delete/${realty.id}` data-bs-toggle="modal" data-bs-target="#myModal")
+                  button.btn.btn-danger
+                      i.fa.fa-trash
+
+    .modal.fade(id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            h5.modal-title(id="myModalLabel") Confirmation de suppression
+            button.close(type="button" data-bs-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+          .modal-body Souhaitez-vous réellement supprimer ce bien ?
+          .modal-footer
+            button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Annuler
+            a.btn.btn-danger(id="delete_link" href=`/admin/user/delete/id`) Supprimer
+
+    block scripts
+      script(src="/js/modal_delete.js")

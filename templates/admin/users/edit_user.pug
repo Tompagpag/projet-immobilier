@@ -3,7 +3,12 @@ block breadcrumb
     p.fa.fa-user &nbsp; | Les utilisateurs
 
 block content
-    h1 Edition
+    div.d-flex.justify-content-between
+      div
+        h1 Modifier un utilisateur
+      div
+        a.btn.btn-primary(href="/admin/user/") Retourner à la liste
+    hr
     if error
         .alert.alert-danger #{error}
     form(action=`/admin/user/update/${user.id}` method="post")

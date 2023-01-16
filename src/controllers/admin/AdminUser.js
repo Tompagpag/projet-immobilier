@@ -33,10 +33,13 @@ export default class AdminUser {
 
     editUser(req, res) {
       const id = req.params.id;
-      const { email, civility, lastname, firstname, phone } = req.body;
+      let { email, civility, lastname, firstname, phone } = req.body;
+      civility == "1" ? civility = 'M' : civility = 'F';
       (new User().updateUser(id, { email, civility, lastname, firstname, phone })).then(() => {
         req.flash('notify', `L'utilisateur ${firstname} ${lastname} a été mis à jour.`);
         res.redirect('/admin/user');
+      }).catch((error) => {
+          res.render('admin/users/edit_user', {user: { email, civility, lastname, firstname, phone }, error})
       })
     }
 }
