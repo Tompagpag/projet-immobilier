@@ -1,0 +1,84 @@
+extends ../layout.pug
+block breadcrumb
+    p.fa.fa-home &nbsp; | Les biens
+
+block content
+    div.d-flex.justify-content-between
+      div
+        h1 Créer un nouveau bien
+      div
+        a.btn.btn-primary(href="/admin/realty") Liste des biens
+    hr
+    form(action='/connexion' method="post")
+        .row.mb-3
+          .col-md-4
+            h4 Contact du bien
+            .input.mb-3
+                label(for="email") Email
+                  input(type="email" class="form-control" placeholder="jacqueline.dup@mail.com" name="email" value="")
+            .input.mb-3
+                label(for="civility") Civilité
+                  select(class="form-control" name="civility")
+                    option(value="1") Monsieur
+                    option(value="2") Madame
+            .input.mb-3
+                label(for="lastname") Nom
+                  input(type="text" class="form-control" placeholder="Dupont" name="lastname" value="")
+            .input.mb-3
+                label(for="firstname") Prénom
+                  input(type="text" class="form-control" placeholder="Jacqueline" name="firstname" value="")
+            .input.mb-3
+                label(for="mobile") Mobile
+                  input(type="text" class="form-control" placeholder="0667094563" name="mobile" value="")
+            .input.mb-3
+                label(for="phone") Téléphone
+                  input(type="text" class="form-control" placeholder="0146347645" name="phone" value="")
+            .input.mb-3
+                label(for="info") Informations complémentaires
+                  input(type="text" class="form-control" placeholder="Disponibilités ..." name="info" value="")
+          .col-md-4
+            h4 Adresse du bien
+            .input.mb-3
+                label(for="adress") Adresse
+                    input(type="text" class="form-control" placeholder="12 rue Madame" name="adress1")
+                    input(type="text" class="form-control" placeholder="suite adresse (facultatif)" name="adress2")
+            .input.mb-3
+                label(for="zipcode") Code Postal
+                  input(type="text" class="form-control" placeholder="75006" name="zipcode" value="")
+            .input.mb-3
+                label(for="town") Ville
+                  input(type="text" class="form-control" placeholder="Paris" name="town" value="")
+            .input.mb-3
+                label(for="info-adress") Informations complémentaires
+                  textarea(class="form-control", placeholder="Distance des transports, commerces de proximité, ...", name="info-adress", value="", rows="6")
+          .col-md-4
+            h4 Informations du bien
+            .input.mb-3
+                label(for="type") Type de bien
+                  select(class="form-control" name="type")
+                    option(value="1") Maison
+                    option(value="2") Appartement
+                    option(value="3") Garage
+                    option(value="4") Bureau
+                    option(value="5") Terrain
+            .input.mb-3
+                label(for="price") Prix net vendeur
+                  input(type="text" class="form-control" placeholder="500 000€" name="price" value="")
+            .input.mb-3
+                label(for="area") Surface (m²)
+                  input(type="text" class="form-control" placeholder="250" name="area" value="")
+            .input.mb-3
+                label(for="room") Pièces
+                  input(type="text" class="form-control" placeholder="3" name="room" value="")
+            //- .input.mb-3
+                label(for="price") Photos
+                  input(type="text" class="form-control" placeholder="" name="photo" value="")
+            .input.mb-3
+                label(for="info") Informations complémentaires sur le bien
+                  textarea(class="form-control", placeholder="Travaux à prévoir, diagnostic, GES, ...", name="info", value="", rows="6")
+
+        .row.justify-content-center
+            .col-2
+                button.btn.btn-primary(type="submit") Enregistrer
+
+    block scripts

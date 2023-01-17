@@ -62,4 +62,11 @@ export default (app) => {
       (new AdminRealty()).print(req, res);
     })
 
+    app.get('/admin/realty/delete/:id', (req,res) => {
+      (new AdminRealty()).delete(req, res);
+    });
+
+    app.get('/admin/realty/create', (req,res) => {
+      (new AdminRealty()).formNew(req, res);
+    });
   };
