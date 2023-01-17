@@ -7,7 +7,7 @@ block content
       div
         h1 Liste des biens
       div
-        a.btn.btn-primary(href="#") Ajouter un bien
+        a.btn.btn-primary(href="/admin/realty/create") Ajouter un bien
     hr
     table
       thead
@@ -19,7 +19,7 @@ block content
         each realty in realties
           tr
             td(align="center")= `${realty.firstname} ${realty.lastname.toUpperCase()}`
-            td(align="center")= `${realty.adress || ''}\n${realty.zipcode || ''} ${realty.town || ''}`
+            td(align="center")= `${realty.adress || ''}${realty.zipcode || ''} ${realty.town || ''}`
             td(align="center")= realty.info
             td
               a.btn(href=`/admin/realty/edit/${realty.id}`)

@@ -10,4 +10,10 @@ export default class Realties {
       }
     })
   }
+
+  deleteRealty(id) {
+    return connexion.promise().query("DELETE FROM `realties` WHERE `id`= ?", id).then((rows) => {
+      return rows[0].affectedRows;
+    })
+  }
 }
