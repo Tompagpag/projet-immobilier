@@ -16,4 +16,8 @@ export default class Realties {
       return rows[0].affectedRows;
     })
   }
+
+  createNewRealty(realty) {
+    return connexion.promise().query("INSERT INTO `realties` SET ?",  realty)
+  }
 }

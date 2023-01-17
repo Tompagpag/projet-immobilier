@@ -55,7 +55,7 @@ app.use(flash());
 //--------------------------------------------------------------------
 //      Middleware pour utiliser le body de la request
 //--------------------------------------------------------------------
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); // extented à true pour pouvoir faire des tableaux depuis les inputs
 //app.use(express.json());
 
 //--------------------------------------------------------------------

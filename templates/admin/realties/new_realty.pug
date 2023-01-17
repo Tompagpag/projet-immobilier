@@ -9,13 +9,15 @@ block content
       div
         a.btn.btn-primary(href="/admin/realty") Liste des biens
     hr
-    form(action='/connexion' method="post")
+    form(action='/admin/realty/new' method="post")
         .row.mb-3
           .col-md-4
             h4 Contact du bien
             .input.mb-3
                 label(for="email") Email
-                  input(type="email" class="form-control" placeholder="jacqueline.dup@mail.com" name="email" value="")
+                  input(type="email" id="email_contact" class="form-control" placeholder="jacqueline.dup@mail.com" name="email" value="")
+                  .div#email_prop(hidden=true)
+                    ul#results
             .input.mb-3
                 label(for="civility") Civilité
                   select(class="form-control" name="civility")
@@ -49,8 +51,8 @@ block content
                 label(for="town") Ville
                   input(type="text" class="form-control" placeholder="Paris" name="town" value="")
             .input.mb-3
-                label(for="info-adress") Informations complémentaires
-                  textarea(class="form-control", placeholder="Distance des transports, commerces de proximité, ...", name="info-adress", value="", rows="6")
+                label(for="info_adress") Informations complémentaires
+                  textarea(class="form-control", placeholder="Distance des transports, commerces de proximité, ...", name="info_adress", value="", rows="6")
           .col-md-4
             h4 Informations du bien
             .input.mb-3
@@ -74,11 +76,12 @@ block content
                 label(for="price") Photos
                   input(type="text" class="form-control" placeholder="" name="photo" value="")
             .input.mb-3
-                label(for="info") Informations complémentaires sur le bien
-                  textarea(class="form-control", placeholder="Travaux à prévoir, diagnostic, GES, ...", name="info", value="", rows="6")
+                label(for="info_realty") Informations complémentaires sur le bien
+                  textarea(class="form-control", placeholder="Travaux à prévoir, diagnostic, GES, ...", name="info_realty", value="", rows="6")
 
         .row.justify-content-center
             .col-2
                 button.btn.btn-primary(type="submit") Enregistrer
 
     block scripts
+        //- script(src="/js/check_contact_email.js")
