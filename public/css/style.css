@@ -102,3 +102,8 @@ tbody tr:nth-child(odd) {
   text-underline-offset: 6px;
   color: #1D7A8C !important;
 }
+
+
+#results {
+  z-index: 2000;
+}
