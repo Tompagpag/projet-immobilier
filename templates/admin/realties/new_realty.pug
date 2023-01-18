@@ -9,7 +9,7 @@ block content
       div
         a.btn.btn-primary(href="/admin/realty") Liste des biens
     hr
-    form(action='/admin/realty/new' method="post")
+    form(action='/admin/realty/new' method="post" enctype="multipart/form-data")
         .row.mb-3
           .col-md-4
             h4 Contact du bien
@@ -72,16 +72,20 @@ block content
             .input.mb-3
                 label(for="room") Pièces
                   input(type="text" class="form-control" placeholder="3" name="room" value="")
-            //- .input.mb-3
-                label(for="price") Photos
-                  input(type="text" class="form-control" placeholder="" name="photo" value="")
             .input.mb-3
                 label(for="info_realty") Informations complémentaires sur le bien
                   textarea(class="form-control", placeholder="Travaux à prévoir, diagnostic, GES, ...", name="info_realty", value="", rows="6")
+            .lcUpload__block
+                .lcUpload__input
+                    input.lcUpload__file(type="file" name="photos" id="file" data-multiple-caption="{count} fichiers sélectionnés" multiple)
+                    label(for="file")
+                        strong Choisissez le fichier
+                        span.lcUpload__dragndrop  ou glissez le ici
 
         .row.justify-content-center
             .col-2
                 button.btn.btn-primary(type="submit") Enregistrer
 
     block scripts
+        script(src="/js/upload.js")
         //- script(src="/js/check_contact_email.js")

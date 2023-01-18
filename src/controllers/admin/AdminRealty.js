@@ -1,5 +1,6 @@
 import Realties from "../../repository/Realties.js"
 import Contacts from "../../repository/Contacts.js"
+import UploadImageProductService from "../../services/UploadImageProduct.js"
 
 export default class AdminRealty {
 
@@ -34,6 +35,7 @@ export default class AdminRealty {
         mobile: req.body.mobile,
         info: req.body.info,
       };
+
       let formRealty =  {
         adress1 : req.body.adress1 || '',
         adress2 : req.body.adress2 || '',
@@ -47,6 +49,8 @@ export default class AdminRealty {
         info : req.body.info_realty || '',
         user_id: req.session.user.id,
       };
+
+
       repoContact.getContactByEmail(formContact.email).then(async (contact) => {
           req.body.user_id = req.session.user.id;
           // Existe en BDD
@@ -63,9 +67,26 @@ export default class AdminRealty {
               });
           }
           const repoRealty = new Realties();
-          repoRealty.add(formRealty).then(() => {
-              req.flash('notify', `Le bien a été créé.`);
-              res.redirect('/admin/realty');
+          repoRealty.add(formRealty).then((rows) => {
+            let photos = [];
+            // Enregistrement des images
+            if(typeof req.files != 'undefined' && req.files != null) {
+              if(typeof req.files.photos[0] === 'undefined') {
+                req.files.photos = [req.files.photos];
+              }
+              const UploadImageProduct = new UploadImageProductService();
+              if(typeof req.files.photos != 'undefined' && req.files.photos.length > 0) {
+
+                Object.values(req.files.photos).forEach(file => {
+                  photos.push(UploadImageProduct.moveFile(file, rows[0].insertId));
+                });
+                }
+              }
+
+            Promise.all(photos).then((values) => {
+                req.flash('success', `Le bien a été enregistré`);
+                res.redirect('/admin/realty');
+            });
           }).catch((err) => {
               res.render('admin/realties/new_realty', {
                   error: "Une erreur est survenue.",
