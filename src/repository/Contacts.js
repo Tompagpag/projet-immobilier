@@ -14,19 +14,16 @@ export default class Contacts {
   }
 
   getContactByEmail(email) {
-    return connexion.promise().query("SELECT * FROM `contacts` WHERE `email`=?",  email).then((rows) => {
-        if(rows[0].length == 1) return rows[0][0];
-        return {};
-    });
+      return connexion.promise().query("SELECT * FROM `contacts` WHERE `email`=?",  email).then((rows) => {
+          if(rows[0].length == 1) return rows[0][0];
+          return {};
+      });
   }
-  // findEmail(query) {
-  //   return connexion.promise().query("SELECT * FROM `contacts` WHERE `email` LIKE ? LIMIT 5", query+"%").then((rows) => {
-  //     // console.log(rows[0])
-  //     if (rows[0].length >= 1) {
-  //       return rows[0]
-  //     } else {
-  //       return Promise.reject("Il n'y a pas de contact avec cet email.")
-  //     }
-  //   })
-  // }
+
+  getContactByPartialEmail(email) {
+      return connexion.promise().query("SELECT * FROM `contacts` WHERE `email` LIKE ? LIMIT 20",  email+'%').then((rows) => {
+          if(rows[0].length >= 1) return Promise.resolve(rows[0]);
+          return Promise.reject();
+      });
+  }
 }
