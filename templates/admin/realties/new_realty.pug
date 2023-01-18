@@ -3,6 +3,8 @@ block breadcrumb
     p.fa.fa-home &nbsp; | Les biens
 
 block content
+    template#tplContact
+        li
     div.d-flex.justify-content-between
       div
         h1 Créer un nouveau bien
@@ -15,29 +17,28 @@ block content
             h4 Contact du bien
             .input.mb-3
                 label(for="email") Email
-                  input(type="email" id="email_contact" class="form-control" placeholder="jacqueline.dup@mail.com" name="email" value="")
-                  .div#email_prop(hidden=true)
-                    ul#results
+                  input(type="email" id="contact_by_email" class="form-control" placeholder="jacqueline.dup@mail.com" name="email" value="")
+                ul#listContacts
             .input.mb-3
                 label(for="civility") Civilité
-                  select(class="form-control" name="civility")
+                  select#contact_civility(class="form-control" name="civility")
                     option(value="1") Monsieur
                     option(value="2") Madame
             .input.mb-3
                 label(for="lastname") Nom
-                  input(type="text" class="form-control" placeholder="Dupont" name="lastname" value="")
+                  input#contact_lastname(type="text" class="form-control" placeholder="Dupont" name="lastname" value="")
             .input.mb-3
                 label(for="firstname") Prénom
-                  input(type="text" class="form-control" placeholder="Jacqueline" name="firstname" value="")
+                  input#contact_firstname(type="text" class="form-control" placeholder="Jacqueline" name="firstname" value="")
             .input.mb-3
                 label(for="mobile") Mobile
-                  input(type="text" class="form-control" placeholder="0667094563" name="mobile" value="")
+                  input#contact_mobile(type="text" class="form-control" placeholder="0667094563" name="mobile" value="")
             .input.mb-3
                 label(for="phone") Téléphone
-                  input(type="text" class="form-control" placeholder="0146347645" name="phone" value="")
+                  input#contact_phone(type="text" class="form-control" placeholder="0146347645" name="phone" value="")
             .input.mb-3
                 label(for="info") Informations complémentaires
-                  input(type="text" class="form-control" placeholder="Disponibilités ..." name="info" value="")
+                  input#contact_info(type="text" class="form-control" placeholder="Disponibilités ..." name="info" value="")
           .col-md-4
             h4 Adresse du bien
             .input.mb-3
@@ -88,4 +89,4 @@ block content
 
     block scripts
         script(src="/js/upload.js")
-        //- script(src="/js/check_contact_email.js")
+        script(src="/js/check_contact_email.js")

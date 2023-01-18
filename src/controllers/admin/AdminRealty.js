@@ -84,7 +84,7 @@ export default class AdminRealty {
               }
 
             Promise.all(photos).then((values) => {
-                req.flash('success', `Le bien a été enregistré`);
+                req.flash('notify', `Le bien a été enregistré`);
                 res.redirect('/admin/realty');
             });
           }).catch((err) => {
