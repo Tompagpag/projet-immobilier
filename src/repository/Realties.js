@@ -1,6 +1,11 @@
 import connexion from "../../app/database_sql.js"
 
 export default class Realties {
+
+  add(realty) {
+      return connexion.promise().query("INSERT INTO `realties` SET ?", realty);
+  }
+
   getRealties() {
     return connexion.promise().query('SELECT `realties`.*, `users`.`firstname`, `users`.`lastname` FROM `realties` INNER JOIN `users` ON `realties`.`user_id`=`users`.`id` ORDER BY `user_id`;').then((rows) => {
       if (rows[0].length >= 1) {
