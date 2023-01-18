@@ -2,6 +2,14 @@ import Contacts from "../../repository/Contacts.js"
 
 export default class AdminContact {
 
+  print(request, response) {
+      (new Contacts).getContacts().then((contacts) => {
+        response.render('admin/contacts/list_contacts', {contacts});
+      }).catch((error) => {
+        response.render('admin/contacts/list_contacts', {contacts:  {}, error})
+      })
+  }
+
   ajaxContactByEmail(request, response) {
       if(typeof request.session.user !== 'undefined') {
           const repoContact = new Contacts();

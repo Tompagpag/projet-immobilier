@@ -13,6 +13,16 @@ export default class Contacts {
       });
   }
 
+  getContacts() {
+      return connexion.promise().query('SELECT * FROM `contacts` ORDER BY `lastname`;').then((rows) => {
+        if (rows[0]) {
+          return rows[0]
+        } else {
+          return Promise.reject("Il n'y a pas de contacts.")
+        }
+      })
+  }
+
   getContactByEmail(email) {
       return connexion.promise().query("SELECT * FROM `contacts` WHERE `email`=?",  email).then((rows) => {
           if(rows[0].length == 1) return rows[0][0];
