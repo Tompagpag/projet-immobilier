@@ -107,3 +107,33 @@ tbody tr:nth-child(odd) {
 #results {
   z-index: 2000;
 }
+
+
+
+.lcUpload__block {
+  position: relative;
+  text-align: center;
+  font-size: 1.25rem;
+  background-color: #bbb;
+  padding: 80px 20px;
+  border-radius: .25rem;
+}
+
+.lcUpload__file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+}
+
+.lcUpload__input,
+.lcUpload__input label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding-top: 55px;
+}

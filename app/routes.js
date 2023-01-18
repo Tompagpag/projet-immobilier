@@ -5,6 +5,7 @@ import Dashboard from "../src/controllers/admin/Dashboard.js"
 import AdminUser from "../src/controllers/admin/AdminUser.js"
 import AdminRealty from "../src/controllers/admin/AdminRealty.js"
 import AdminContact from "../src/controllers/admin/AdminContact.js"
+import expressFileupload from "express-fileupload";
 
 export default (app) => {
 
@@ -71,7 +72,9 @@ export default (app) => {
       (new AdminRealty()).formNew(req, res);
     });
 
-    app.post('/admin/realty/new', (req, res) => {
+    app.post('/admin/realty/new',
+      expressFileupload({createParentPath: true}),
+      (req, res) => {
       (new AdminRealty()).create(req, res);
     });
 
