@@ -4,11 +4,13 @@ import UploadImageProductService from "../../services/UploadImageProduct.js"
 
 export default class AdminRealty {
 
+  typeRealties = ['Inconnu', 'Maison', 'Appartement', 'Garage', 'Bureau', 'Terrain'];
+
   print(req, res) {
     (new Realties).getRealties().then((realties) => {
-      res.render('admin/realties/list_realties', {realties});
+      res.render('admin/realties/list_realties', {realties, typeRealties: this.typeRealties});
     }).catch((error) => {
-      res.render('admin/realties/list_realties', {realties:  {}, error})
+      res.render('admin/realties/list_realties', {realties:  {}, typeRealties: this.typeRealties, error})
     })
   }
 
@@ -21,6 +23,16 @@ export default class AdminRealty {
 
   formNew(req, res) {
     res.render('admin/realties/new_realty');
+  }
+
+  showRealty(req, res) {
+    (new Realties).getRealty(req.params.id).then((realty) => {
+      // console.log(realty)
+      res.render('admin/realties/show_realty', {realty, typeRealties: this.typeRealties});
+    }).catch((error) => {
+        req.flash('notify', `Une erreur est survenue: ${error}`);
+        res.redirect('/admin/realty');
+    })
   }
 
   create(req, res) {
@@ -81,12 +93,14 @@ export default class AdminRealty {
                   photos.push(UploadImageProduct.moveFile(file, rows[0].insertId));
                 });
                 }
+                Promise.all(photos).then((values) => {
+                    req.flash('notify', `Le bien a été enregistré`);
+                    res.redirect('/admin/realty');
+                  });
+                } else {
+                    req.flash('notify', `Le bien a été enregistré`);
+                    res.redirect('/admin/realty');
               }
-
-            Promise.all(photos).then((values) => {
-                req.flash('notify', `Le bien a été enregistré`);
-                res.redirect('/admin/realty');
-            });
           }).catch((err) => {
               res.render('admin/realties/new_realty', {
                   error: "Une erreur est survenue.",

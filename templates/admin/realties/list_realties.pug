@@ -12,15 +12,19 @@ block content
     table
       thead
         tr
+          th Détail
           th Vendeur
           th Adresse
           th Description
       tbody
         each realty in realties
           tr
+            td(align="center")
+              a.btn(href=`/admin/realty/show/${realty.id}`)
+                i.fa.fa-search
             td(align="center")= `${realty.firstname} ${realty.lastname.toUpperCase()}`
             td(align="center")= `${realty.adress || ''}${realty.zipcode || ''} ${realty.town || ''}`
-            td(align="center")= realty.info
+            td(align="center")=`Type: ${typeRealties[realty.type]} Surface: ${realty.area || 'non renseigné'} m² Prix: ${realty.price || 'non renseigné'} €`
             td
               a.btn(href=`/admin/realty/edit/${realty.id}`)
                   button.btn.btn-primary

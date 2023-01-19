@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded',() =>  {
 
     // Récupération des informations d'un contact via son email
-    if(typeof document.querySelector('#contact_by_email') != 'undefined') {
+    if(document.querySelector('#contact_by_email') != null) {
         let currentEmail = document.querySelector('#contact_by_email').value;
         document.querySelector('#contact_by_email').addEventListener('blur', (e) => {
             let email = e.currentTarget.value;
