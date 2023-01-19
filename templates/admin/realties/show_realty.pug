@@ -1,0 +1,19 @@
+extends ../layout.pug
+block breadcrumb
+    p.fa.fa-home &nbsp; | Les biens
+
+block content
+    div.d-flex.justify-content-between
+      div
+        h1 Détail du bien
+      div
+        a.btn.btn-primary(href="/admin/realty") Liste des biens
+    hr
+    .row
+      .realty-photos
+          img(src="/images/realties/112/flat1.jpg", alt="")
+          img(src="/images/realties/112/flat1.jpg", alt="")
+          img(src="/images/realties/112/flat1.jpg", alt="")
+          img(src="/images/realties/112/flat1.jpg", alt="")
+    hr
+    p #{realty.type}

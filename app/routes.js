@@ -69,22 +69,26 @@ export default (app) => {
     });
 
     app.get('/admin/realty/create', (req, res) => {
-      (new AdminRealty()).formNew(req, res);
+        (new AdminRealty()).formNew(req, res);
+    });
+
+    app.get('/admin/realty/show/:id', (req,res) => {
+        (new AdminRealty()).showRealty(req, res);
     });
 
     app.post('/admin/realty/new',
     expressFileupload({createParentPath: true}),
     (req, res) => {
-      (new AdminRealty()).create(req, res);
+        (new AdminRealty()).create(req, res);
     });
 
-
+  //admin/contact
     app.get('/admin/contact/byemail', (req, res) => {
-      (new AdminContact()).ajaxContactByEmail(req, res);
+        (new AdminContact()).ajaxContactByEmail(req, res);
     });
 
     app.get('/admin/contact/search_partial_email', (req, res) => {
-      (new AdminContact()).ajaxSearchContactByEmail(req, res);
+        (new AdminContact()).ajaxSearchContactByEmail(req, res);
     });
 
     app.get('/admin/contact', (req, res) => {
