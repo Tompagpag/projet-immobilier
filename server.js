@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import routes from './app/routes.js';
 import session from "express-session";
+import { jwtControl, adminControl } from './src/services/JWTMiddleware.js';
 import flash from "express-flash-messages";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -34,7 +35,13 @@ app.use(session({
 //--------------------------------------------------------------------
 //      Exemple Session fictive
 //--------------------------------------------------------------------
-app.use((req,res,next) => {  req.session.user = { id: 15, firstname: 'tots', lastname : 'pagz' }; next(); });
+// app.use((req,res,next) => {  req.session.user = { id: 15, firstname: 'tots', lastname : 'pagz' }; next(); });
+
+//--------------------------------------------------------------------
+//      Middleware pour les tokens JWT
+//--------------------------------------------------------------------
+app.use('/', (req,res,next) => jwtControl(req,res,next));
+app.use('/admin', (req,res,next) => adminControl(req,res,next));
 
 //--------------------------------------------------------------------
 //      Middleware pour transmettre les données à PUG (titre, session ...)
