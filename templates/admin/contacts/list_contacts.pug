@@ -1,5 +1,50 @@
 extends ../layout.pug
 block breadcrumb
-    p.fa.fa-user &nbsp; | Les utilisateurs
+    p.fa.fa-address-book &nbsp; | Les contacts
 
 block content
+    div.d-flex.justify-content-between
+      div
+        h1 Liste des contacts
+      div
+        a.btn.btn-primary(href="#") Ajouter un contact
+    hr
+    table
+      thead
+        tr
+          th Civilité
+          th Nom
+          th Email
+          th Téléphone
+          th Informations
+      tbody
+        each contact in contacts
+          tr
+            td(align="center")= contact.civility
+            td(align="center")= `${contact.firstname} ${contact.lastname}`
+            td(align="center")= contact.email
+            td(align="center")= `${contact.phone} / ${contact.mobile}`
+            td(align="center")= contact.info
+            td
+              a.btn(href=`/admin/contact/edit/${contact.id}`)
+                  button.btn.btn-primary
+                      i.fa.fa-pen
+            td
+                a(id=`myInput${contact.id}` href=`/admin/contact/delete/${contact.id}` data-bs-toggle="modal" data-bs-target="#myModal")
+                    button.btn.btn-danger
+                        i.fa.fa-trash
+
+    .modal.fade(id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            h5.modal-title(id="myModalLabel") Confirmation de suppression
+            button.close(type="button" data-bs-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+          .modal-body Souhaitez-vous réellement supprimer l'utilisateur ?
+          .modal-footer
+            button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Annuler
+            a.btn.btn-danger(id="delete_link" href=`/admin/contact/delete/id`) Supprimer
+
+    block scripts
+      script(src="/js/modal_delete.js")

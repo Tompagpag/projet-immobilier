@@ -94,6 +94,13 @@ export default class AdminRealty {
                 });
                 }
                 Promise.all(photos).then((values) => {
+                  values.forEach((path, index) => {
+                    console.log('id realty => ', idRealty);
+                    console.log('alt => ', request.body.image_alt[index+1]);
+                    console.log('title => ', request.body.image_title[index+1]);
+                    console.log('order => ', request.body.image_order[index+1]);
+                    console.log('path => ', path.replace('public/','')+'/');
+                });
                     req.flash('notify', `Le bien a été enregistré`);
                     res.redirect('/admin/realty');
                   });
