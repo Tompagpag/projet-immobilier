@@ -5,6 +5,13 @@ block breadcrumb
 block content
     template#tplContact
         li
+    template#tplImage
+    .onePicture
+        img.productImg(src="")
+        input(class="order" type="hidden")
+        input(class="title" type="text" placeholder="Titre (Attribut title)")
+        input(class="alt" type="text" placeholder="Texte alternatif (Attribut alt)")
+
     div.d-flex.justify-content-between
       div
         h1 Créer un nouveau bien
@@ -82,7 +89,7 @@ block content
                     label(for="file")
                         strong Choisissez le fichier
                         span.lcUpload__dragndrop  ou glissez le ici
-
+            #lcUpoadList
         .row.justify-content-center
             .col-2
                 button.btn.btn-primary(type="submit") Enregistrer

@@ -6,8 +6,6 @@ import AdminUser from "../src/controllers/admin/AdminUser.js"
 import AdminRealty from "../src/controllers/admin/AdminRealty.js"
 import AdminContact from "../src/controllers/admin/AdminContact.js"
 import expressFileupload from "express-fileupload";
-import jwt from 'jsonwebtoken';
-import Cookies from "cookies";
 
 export default (app) => {
 
