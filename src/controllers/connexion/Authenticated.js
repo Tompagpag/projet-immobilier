@@ -35,7 +35,7 @@ export default class Authenticated {
           res.render('authenticated/form', {user: {email: req.body.email}, error: 'Mot de passe érroné !'});
         }
       }).catch((error) => {
-          res.render('authenticated/form', {user: {email: req.body.email}, error});
+          res.render('authenticated/form', {user: {email: req.body.email}, error: 'Erreur de connexion'});
       })
     }
 
