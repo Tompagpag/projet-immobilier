@@ -108,6 +108,18 @@ tbody tr:nth-child(odd) {
   z-index: 2000;
 }
 
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.connexion {
+  width: 50rem;
+}
+
 
 
 .lcUpload__block {
