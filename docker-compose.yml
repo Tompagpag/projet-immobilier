@@ -1,22 +1,22 @@
 version: '3.8'
-services:
-  mysqldb:
-    build: ./mysql-dump
-    restart: unless-stopped
-    env_file: ./.env
-    environment:
+services: # un service = un container
+  mysqldb: # premier service
+    build: ./mysql-dump # référence à un dossier/fichier qui contient un dockerfile pour créer une image
+    restart: unless-stopped # pour gérer le systeme de restart, always ...
+    env_file: ./.env # adresse du fichier env
+    environment: # variables d'env qui viennent du .env
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
   web_immo:
-    depends_on:
+    depends_on: # si mysqldb pas besoin de faire tourner ce service
       - mysqldb
-    build: ./web
+    build: ./web # cherche dans le path le dockerfile
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT # port qui devient dispo
     volumes:
       - data_immo:/www
     environment:
@@ -25,7 +25,8 @@ services:
       - SQL_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - SQL_DBNAME=$MYSQLDB_DATABASE
       - SQL_PORT=$MYSQLDB_DOCKER_PORT
-    stdin_open: true
-    tty: true
+      - PORT=$NODE_DOCKER_PORT
+    stdin_open: true # equivalent du -t
+    tty: true # equivalent du -i
 volumes:
   data_immo:
